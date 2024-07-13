@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj5rybim1opon"]
+
+[ext_resource type="Script" path="res://character_info.gd" id="1_pc3mh"]
+[ext_resource type="Texture2D" uid="uid://bxck7ttyur31n" path="res://Images/CharacterIcons/unknown.png" id="1_t0tlc"]
+[ext_resource type="FontFile" uid="uid://bo12b07jilrqp" path="res://Touchscreen-Regular.ttf" id="2_12e61"]
+
+[sub_resource type="Theme" id="Theme_0wyxr"]
+default_font = ExtResource("2_12e61")
+default_font_size = 28
+
+[sub_resource type="Theme" id="Theme_cvdtb"]
+default_font = ExtResource("2_12e61")
+default_font_size = 28
+
+[node name="CharacterInfo" type="VFlowContainer"]
+alignment = 1
+script = ExtResource("1_pc3mh")
+
+[node name="CharacterIcon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_t0tlc")
+
+[node name="StatsLines" type="HFlowContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="StatsLines"]
+layout_mode = 2
+theme = SubResource("Theme_0wyxr")
+theme_override_colors/font_outline_color = Color(0.447059, 0.447059, 0.447059, 1)
+theme_override_constants/outline_size = 8
+text = "Unknown"
+vertical_alignment = 1
+
+[node name="BitsCollected" type="Label" parent="StatsLines"]
+layout_mode = 2
+theme = SubResource("Theme_cvdtb")
+theme_override_colors/font_outline_color = Color(0.446777, 0.446777, 0.446777, 1)
+theme_override_constants/outline_size = 8
+text = "() 0"
+vertical_alignment = 1
+
+[node name="Consecutive" type="Label" parent="StatsLines"]
+layout_mode = 2
+theme = SubResource("Theme_cvdtb")
+theme_override_colors/font_outline_color = Color(0.446777, 0.446777, 0.446777, 1)
+theme_override_constants/outline_size = 8
+vertical_alignment = 1

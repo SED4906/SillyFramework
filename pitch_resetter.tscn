@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1atlxqldgpwx"]
+
+[ext_resource type="Script" path="res://PitchResetter.gd" id="1_tpel6"]
+[ext_resource type="AudioStream" uid="uid://dee3ku5lfln6m" path="res://Sounds/collect_finish.ogg" id="2_t3fvm"]
+
+[node name="PitchResetter" type="Timer"]
+one_shot = true
+script = ExtResource("1_tpel6")
+
+[node name="Finish" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_t3fvm")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

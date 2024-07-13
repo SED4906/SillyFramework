@@ -1,0 +1,182 @@
+[gd_scene load_steps=25 format=3 uid="uid://cgvg5dm4v5k15"]
+
+[ext_resource type="PackedScene" uid="uid://ji72vr4wbde5" path="res://completion_indicator.tscn" id="1_bpi1r"]
+[ext_resource type="Script" path="res://test.gd" id="1_fainh"]
+[ext_resource type="Script" path="res://CameraFollower.gd" id="2_0iwhl"]
+[ext_resource type="ArrayMesh" uid="uid://bo2ghiwdj38fg" path="res://Levels/Test/test.obj" id="2_3ydst"]
+[ext_resource type="PackedScene" uid="uid://bj5rybim1opon" path="res://character_info.tscn" id="3_e6v2y"]
+[ext_resource type="PackedScene" uid="uid://badefrrelrjvi" path="res://character.tscn" id="3_vtglh"]
+[ext_resource type="PackedScene" uid="uid://blwjt85umushd" path="res://hint_help.tscn" id="5_8y6wc"]
+[ext_resource type="PackedScene" uid="uid://s55c36k0ago0" path="res://Objects/dut.tscn" id="5_wxusx"]
+[ext_resource type="Script" path="res://Components/BakedCollisionComponent.gd" id="6_iknky"]
+[ext_resource type="Script" path="res://Components/PlayerSpawnComponent.gd" id="6_ld4nd"]
+[ext_resource type="PackedScene" uid="uid://m76b8yt5qq4j" path="res://Builders/duts_pattern_circle.tscn" id="8_skn6v"]
+[ext_resource type="Script" path="res://DeathBarrier.gd" id="9_gim0p"]
+[ext_resource type="PackedScene" uid="uid://b5w3rf0p4m6cr" path="res://Builders/duts_pattern_line.tscn" id="9_rmycw"]
+[ext_resource type="PackedScene" uid="uid://cemgon41pkqut" path="res://Objects/bollard.tscn" id="15_jierh"]
+[ext_resource type="PackedScene" uid="uid://c1atlxqldgpwx" path="res://pitch_resetter.tscn" id="15_jjblr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h67ci"]
+
+[sub_resource type="Sky" id="Sky_73mf6"]
+sky_material = SubResource("ProceduralSkyMaterial_h67ci")
+
+[sub_resource type="Environment" id="Environment_1lfl4"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_73mf6")
+ambient_light_source = 3
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_up0ju"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xrq5k"]
+
+[sub_resource type="Sky" id="Sky_rd2es"]
+sky_material = SubResource("ProceduralSkyMaterial_xrq5k")
+
+[sub_resource type="Environment" id="Environment_6rdu7"]
+background_mode = 2
+sky = SubResource("Sky_rd2es")
+
+[sub_resource type="World3D" id="World3D_yp2jt"]
+environment = SubResource("Environment_6rdu7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pv7f8"]
+size = Vector3(100, 5, 100)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_fainh")
+threshold = 20000
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1lfl4")
+camera_attributes = SubResource("CameraAttributesPractical_up0ju")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 3, 0)
+current = true
+script = ExtResource("2_0iwhl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 256.0
+offset_bottom = 128.0
+grow_horizontal = 2
+
+[node name="CompletionIndicator" parent="Control/SubViewportContainer" instance=ExtResource("1_bpi1r")]
+own_world_3d = true
+world_3d = SubResource("World3D_yp2jt")
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="CharacterInfo" parent="Control" instance=ExtResource("3_e6v2y")]
+layout_mode = 0
+
+[node name="HintHelp" parent="Control" instance=ExtResource("5_8y6wc")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -169.0
+offset_right = 954.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="WorldMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_3ydst")
+script = ExtResource("6_iknky")
+
+[node name="Duts" type="Node" parent="."]
+
+[node name="DutsPatternCircle" parent="Duts" instance=ExtResource("8_skn6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+radius = 0.6
+points = 12
+
+[node name="DutsPatternLine" parent="Duts" instance=ExtResource("9_rmycw")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -1, 0, 1)
+width = 1
+length = 8
+step_up = 0.125
+special_last_dut = true
+
+[node name="DutsPatternLine2" parent="Duts" instance=ExtResource("9_rmycw")]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 1, -1)
+length = 3
+step_up = 0.25
+pattern_type_last = 1
+
+[node name="DutsPatternLine3" parent="Duts" instance=ExtResource("9_rmycw")]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -2.5, 1.6, -2)
+width = 1
+length = 16
+pattern_type_last = 1
+
+[node name="DutsPatternCircle2" parent="Duts" instance=ExtResource("8_skn6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 2, -2.75)
+radius = 0.6
+points = 7
+pattern_type_1 = 1
+pattern_type_2 = 2
+
+[node name="Dut2" parent="Duts" instance=ExtResource("5_wxusx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 3, -2.75)
+bit_type = 3
+
+[node name="Spawns" type="Node" parent="."]
+script = ExtResource("6_ld4nd")
+
+[node name="SpawnPosition" type="Node3D" parent="Spawns"]
+
+[node name="SpawnPosition2" type="Node3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="SpawnPosition3" type="Node3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9525, 0, 2.90804)
+
+[node name="SpawnPosition4" type="Node3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.09836, -4.76837e-07, -2.23358)
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Character" parent="Players" instance=ExtResource("3_vtglh")]
+
+[node name="DeathBarrier" type="Area3D" parent="."]
+collision_layer = 2147483648
+collision_mask = 2147483648
+script = ExtResource("9_gim0p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathBarrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+shape = SubResource("BoxShape3D_pv7f8")
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="Bollard" parent="Objects" instance=ExtResource("15_jierh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="Dut" parent="Objects/Bollard" instance=ExtResource("5_wxusx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bit_type = 2
+is_enabled = false
+metadata/Enabled = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.798232, -0.580382, -0.161193, 0.386995, 0.289071, 0.875599, -0.461585, -0.761311, 0.455351, 0, 1.87722, 0)
+shadow_enabled = true
+
+[node name="PitchResetter" parent="." instance=ExtResource("15_jjblr")]

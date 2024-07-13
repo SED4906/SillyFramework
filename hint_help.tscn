@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://blwjt85umushd"]
+
+[ext_resource type="Script" path="res://hint_help.gd" id="1_hthrk"]
+[ext_resource type="Texture2D" uid="uid://dlhtmxes5kk8f" path="res://Images/HelpIcons/purplepink_interactables.png" id="1_vnaby"]
+[ext_resource type="FontFile" uid="uid://bo12b07jilrqp" path="res://Touchscreen-Regular.ttf" id="2_jlex0"]
+
+[sub_resource type="Theme" id="Theme_dtilg"]
+default_font = ExtResource("2_jlex0")
+default_font_size = 28
+
+[node name="HintHelp" type="HFlowContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+script = ExtResource("1_hthrk")
+
+[node name="Spinner" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_vnaby")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = SubResource("Theme_dtilg")
+theme_override_colors/font_outline_color = Color(0.447059, 0.447059, 0.447059, 1)
+theme_override_constants/outline_size = 8
+text = "Only characters that blush these colors can use these."
+vertical_alignment = 1
+autowrap_mode = 3

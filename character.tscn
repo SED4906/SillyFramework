@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://badefrrelrjvi"]
+
+[ext_resource type="Script" path="res://PlayerCharacter.gd" id="1_qhib2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2ntvy"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hlua"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yexi0"]
+radius = 0.75
+
+[node name="Character" type="CharacterBody3D"]
+collision_layer = 3221225729
+collision_mask = 3221225729
+script = ExtResource("1_qhib2")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_2ntvy")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_6hlua")
+
+[node name="CollectionArea" type="Area3D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_yexi0")
+
+[connection signal="area_entered" from="CollectionArea" to="." method="_on_collection_area_area_entered"]

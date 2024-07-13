@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://s55c36k0ago0"]
+
+[ext_resource type="Script" path="res://Objects/bit.gd" id="1_5fqog"]
+[ext_resource type="Shader" path="res://Objects/bit.gdshader" id="1_cxxuh"]
+[ext_resource type="AudioStream" uid="uid://be6wfrq6u2f2q" path="res://Sounds/collect_purple.ogg" id="3_8togj"]
+[ext_resource type="AudioStream" uid="uid://c25aa2criupyx" path="res://Sounds/collect.ogg" id="3_a05mv"]
+[ext_resource type="AudioStream" uid="uid://dc88ybkktisov" path="res://Sounds/collect_blue.ogg" id="4_pukru"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dene6"]
+render_priority = 0
+shader = ExtResource("1_cxxuh")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u2pit"]
+material = SubResource("ShaderMaterial_dene6")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.05
+radial_segments = 16
+rings = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bvkyt"]
+radius = 0.1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o6exk"]
+playback_mode = 1
+streams_count = 1
+stream_0/stream = ExtResource("3_a05mv")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bkuj0"]
+playback_mode = 1
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("4_pukru")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q6q4i"]
+streams_count = 1
+stream_0/stream = ExtResource("3_8togj")
+stream_0/weight = 1.0
+
+[node name="Dut" type="Node3D"]
+script = ExtResource("1_5fqog")
+metadata/Enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
+instance_shader_parameters/bit_type = 0
+mesh = SubResource("CylinderMesh_u2pit")
+
+[node name="Area" type="Area3D" parent="MeshInstance3D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area"]
+visible = false
+shape = SubResource("SphereShape3D_bvkyt")
+
+[node name="Collect" type="AudioStreamPlayer3D" parent="."]
+visible = false
+stream = SubResource("AudioStreamRandomizer_o6exk")
+
+[node name="CollectBlue" type="AudioStreamPlayer3D" parent="."]
+visible = false
+stream = SubResource("AudioStreamRandomizer_bkuj0")
+
+[node name="CollectPurple" type="AudioStreamPlayer3D" parent="."]
+visible = false
+stream = SubResource("AudioStreamRandomizer_q6q4i")

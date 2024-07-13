@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://m76b8yt5qq4j"]
+
+[ext_resource type="Script" path="res://Builders/DutsPatternCircle.gd" id="1_xaeg2"]
+
+[node name="DutsPatternCircle" type="Node3D"]
+script = ExtResource("1_xaeg2")

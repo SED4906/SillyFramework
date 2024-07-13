@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ji72vr4wbde5"]
+
+[ext_resource type="Script" path="res://completion_indicator.gd" id="1_nqs0b"]
+[ext_resource type="Shader" path="res://Completion.gdshader" id="2_6drut"]
+[ext_resource type="AudioStream" uid="uid://qytvua1tsa3f" path="res://Sounds/specialcompletion.ogg" id="3_xprdr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqypu"]
+render_priority = 0
+shader = ExtResource("2_6drut")
+shader_parameter/completion = 0.0
+shader_parameter/INCOMPLETE_COLOR = Color(0.168627, 0.168627, 0.172549, 0.5)
+shader_parameter/COMPLETE_COLOR = Color(0.976471, 0.658824, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nl3sh"]
+material = SubResource("ShaderMaterial_aqypu")
+height = 4.0
+rings = 1
+
+[node name="CompletionIndicator" type="SubViewport"]
+transparent_bg = true
+size = Vector2i(512, 128)
+script = ExtResource("1_nqs0b")
+
+[node name="Progress" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_nl3sh")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+fov = 36.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xprdr")

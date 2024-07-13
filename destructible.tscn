@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chnm7wxr5caco"]
+
+[ext_resource type="ArrayMesh" uid="uid://b7mcmd55fuv8w" path="res://Meshes/bollard.obj" id="1_weuu8"]
+
+[node name="Destructible" type="MeshInstance3D"]
+mesh = ExtResource("1_weuu8")
