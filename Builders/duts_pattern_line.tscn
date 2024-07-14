@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5w3rf0p4m6cr"]
 
-[ext_resource type="Script" path="res://DutsPatternLine.gd" id="1_42f5y"]
+[ext_resource type="Script" path="res://Builders/DutsPatternLine.gd" id="1_42f5y"]
 
 [node name="DutsPatternLine" type="Node3D"]
 script = ExtResource("1_42f5y")

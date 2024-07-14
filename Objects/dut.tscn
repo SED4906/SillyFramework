@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://s55c36k0ago0"]
 
-[ext_resource type="Script" path="res://Objects/bit.gd" id="1_5fqog"]
-[ext_resource type="Shader" path="res://Objects/bit.gdshader" id="1_cxxuh"]
+[ext_resource type="Script" path="res://Objects/dut.gd" id="1_5fqog"]
+[ext_resource type="Shader" path="res://Objects/dut.gdshader" id="2_lhwih"]
 [ext_resource type="AudioStream" uid="uid://be6wfrq6u2f2q" path="res://Sounds/collect_purple.ogg" id="3_8togj"]
 [ext_resource type="AudioStream" uid="uid://c25aa2criupyx" path="res://Sounds/collect.ogg" id="3_a05mv"]
 [ext_resource type="AudioStream" uid="uid://dc88ybkktisov" path="res://Sounds/collect_blue.ogg" id="4_pukru"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dene6"]
 render_priority = 0
-shader = ExtResource("1_cxxuh")
+shader = ExtResource("2_lhwih")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_u2pit"]
 material = SubResource("ShaderMaterial_dene6")
